@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './CardForm.module.css';
 import { Container } from '@mui/material';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import CustomInput from '../CustomInput';
 import CustomDatePicker from '../CustomDatePicker';
 import CustomButton from '../CustomButton';
 import submitForm from '../../utils/submitForm';
 import getMmYyyyDate from '../../utils/getMmYyyyDate';
+import FormikValues from '../../types/FormikValues';
 
 const CardForm: React.FC = () => {
-  const formikInitialValues = {
+  const formikInitialValues: FormikValues = {
     number: '',
     date: null,
     cvv: '',
@@ -49,13 +50,21 @@ const CardForm: React.FC = () => {
           });
         }}
       >
-        <Form className={styles.form}>
-          <CustomInput name='number' label='Card Number' />
-          <CustomDatePicker name='date' label='Expiration Date' />
-          <CustomInput name='cvv' label='CVV' />
-          <CustomInput name='amount' label='Amount' />
-          <CustomButton title='отправить' />
-        </Form>
+        {(props: FormikProps<FormikValues>) => {
+          return (
+            <Form className={styles.form}>
+              <CustomInput name='number' label='Card Number' />
+              <CustomDatePicker name='date' label='Expiration Date' />
+              <CustomInput name='cvv' label='CVV' />
+              <CustomInput name='amount' label='Amount' />
+
+              <CustomButton
+                title='отправить'
+                disabled={props.dirty && props.isValid ? false : true}
+              />
+            </Form>
+          );
+        }}
       </Formik>
     </Container>
   );

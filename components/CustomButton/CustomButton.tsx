@@ -4,11 +4,10 @@ import { Button, Box } from '@mui/material';
 
 interface CustomButtonProps {
   title: string;
+  disabled: boolean;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ title }) => {
-  const [disabled, setDisabled] = React.useState(false);
-
+const CustomButton: React.FC<CustomButtonProps> = ({ title, disabled }) => {
   return (
     <Box sx={{ width: 300 }}>
       <Button variant='contained' type='submit' disabled={disabled}>
