@@ -1,14 +1,19 @@
 import React from 'react';
 import styles from './CustomInput.module.css';
-import { TextField, Box } from '@mui/material';
+import { TextField, Box, TextFieldProps } from '@mui/material';
 import { useField } from 'formik';
 
 interface CustomInputProps {
   name: string;
   label: string;
+  otherProps?: TextFieldProps;
 }
 
-const CustomInput: React.FC<CustomInputProps> = ({ name, label }) => {
+const CustomInput: React.FC<CustomInputProps> = ({
+  name,
+  label,
+  otherProps,
+}) => {
   const [field, meta] = useField(name);
 
   const [error, setError] = React.useState<boolean>(false);
@@ -34,6 +39,7 @@ const CustomInput: React.FC<CustomInputProps> = ({ name, label }) => {
         {...field}
         error={error}
         helperText={helperText}
+        {...otherProps}
       />
     </Box>
   );

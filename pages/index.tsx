@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import Form from '../components/Form/Form';
+import CardForm from '../components/CardForm';
 
 const Home: NextPage = () => {
-  return <Form />;
+  return <CardForm />;
 };
 
 export default Home;
