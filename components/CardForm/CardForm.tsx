@@ -38,7 +38,7 @@ const CardForm: React.FC = () => {
       <Formik
         initialValues={{ ...formikInitialValues }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           const correctDateFormat = getMmYyyyDate(
             values.date as unknown as Date
           );
@@ -48,9 +48,12 @@ const CardForm: React.FC = () => {
             Cvv: values.cvv,
             Amount: values.amount,
           });
+
+          resetForm();
         }}
       >
         {(props: FormikProps<FormikValues>) => {
+          console.log(props);
           return (
             <Form className={styles.form}>
               <CustomInput name='number' label='Card Number' />
