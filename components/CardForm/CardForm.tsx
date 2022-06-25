@@ -6,13 +6,8 @@ import * as Yup from 'yup';
 import CustomInput from '../CustomInput';
 import CustomDatePicker from '../CustomDatePicker';
 import CustomButton from '../CustomButton';
-
-export interface FormObject {
-  CardNumber: string;
-  ExpDate: string;
-  Cvv: string;
-  Amount: string;
-}
+import submitForm from '../../utils/submitForm';
+import getMmYyyyDate from '../../utils/getMmYyyyDate';
 
 const CardForm: React.FC = () => {
   const formikInitialValues = {
@@ -37,29 +32,15 @@ const CardForm: React.FC = () => {
     amount: Yup.number().typeError('Must be a number').required('Required'),
   });
 
-  const submitForm = async (form: FormObject) => {
-    const response = await fetch('/api', {
-      method: 'POST',
-      body: JSON.stringify({ form }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data = await response.json();
-    console.log(data);
-  };
-
   return (
     <Container maxWidth='xs' className={styles.container}>
       <Formik
         initialValues={{ ...formikInitialValues }}
+        validationSchema={validationSchema}
         onSubmit={(values) => {
-          const stringDate = (values.date as unknown as Date).toISOString();
-          const correctDateFormat = stringDate
-            .split('-')
-            .slice(0, 2)
-            .reverse()
-            .join('/');
+          const correctDateFormat = getMmYyyyDate(
+            values.date as unknown as Date
+          );
           submitForm({
             CardNumber: values.number,
             ExpDate: correctDateFormat,
@@ -67,7 +48,6 @@ const CardForm: React.FC = () => {
             Amount: values.amount,
           });
         }}
-        validationSchema={validationSchema}
       >
         <Form className={styles.form}>
           <CustomInput name='number' label='Card Number' />

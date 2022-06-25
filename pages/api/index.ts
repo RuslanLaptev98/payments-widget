@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Redis from 'ioredis';
 import { v4 as uuidv4 } from 'uuid';
-import { FormObject } from '../../components/CardForm/CardForm';
+import FormObject from '../../types/FormObject';
 
 const redisClient = new Redis('localhost');
 

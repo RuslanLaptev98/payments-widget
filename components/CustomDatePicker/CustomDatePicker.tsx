@@ -5,7 +5,6 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers';
 import { useField } from 'formik';
-import CustomInput from '../CustomInput';
 
 interface CustomDatePickerProps {
   name: string;
