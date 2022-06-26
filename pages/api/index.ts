@@ -11,9 +11,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     const requestId = uuidv4();
     const entry = { RequestId: requestId, ...form };
 
-    redisClient.lpush('payments', JSON.stringify(entry));
-
-    res.status(201).json({ RequestId: requestId, Amount: form.Amount });
+    redisClient.lpush('payments', JSON.stringify(entry)).then((value) => {
+      if (value > 0) {
+        res.status(201).json({ RequestId: requestId, Amount: form.Amount });
+      }
+    });
   }
 };
 

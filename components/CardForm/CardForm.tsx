@@ -9,6 +9,7 @@ import CustomButton from '../CustomButton';
 import submitForm from '../../utils/submitForm';
 import getMmYyyyDate from '../../utils/getMmYyyyDate';
 import FormikValues from '../../types/FormikValues';
+import CustomSnackbar from '../CustomSnackbar';
 
 const CardForm: React.FC = () => {
   const formikInitialValues: FormikValues = {
@@ -33,6 +34,12 @@ const CardForm: React.FC = () => {
     amount: Yup.number().typeError('Must be a number').required('Required'),
   });
 
+  const [toastOpen, setToastOpen] = React.useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = React.useState<string>('');
+  React.useEffect(() => {
+    if (successMessage.length) setToastOpen(true);
+  }, [successMessage]);
+
   return (
     <Container maxWidth='xs' className={styles.container}>
       <Formik
@@ -42,33 +49,38 @@ const CardForm: React.FC = () => {
           const correctDateFormat = getMmYyyyDate(
             values.date as unknown as Date
           );
-          submitForm({
-            CardNumber: values.number,
-            ExpDate: correctDateFormat,
-            Cvv: values.cvv,
-            Amount: values.amount,
-          });
+          submitForm(
+            {
+              CardNumber: values.number,
+              ExpDate: correctDateFormat,
+              Cvv: values.cvv,
+              Amount: values.amount,
+            },
+            setSuccessMessage
+          );
 
           resetForm();
         }}
       >
-        {(props: FormikProps<FormikValues>) => {
-          console.log(props);
-          return (
-            <Form className={styles.form}>
-              <CustomInput name='number' label='Card Number' />
-              <CustomDatePicker name='date' label='Expiration Date' />
-              <CustomInput name='cvv' label='CVV' />
-              <CustomInput name='amount' label='Amount' />
+        {(props: FormikProps<FormikValues>) => (
+          <Form className={styles.form}>
+            <CustomInput name='number' label='Card Number' />
+            <CustomDatePicker name='date' label='Expiration Date' />
+            <CustomInput name='cvv' label='CVV' />
+            <CustomInput name='amount' label='Amount' />
 
-              <CustomButton
-                title='отправить'
-                disabled={props.dirty && props.isValid ? false : true}
-              />
-            </Form>
-          );
-        }}
+            <CustomButton
+              title='отправить'
+              disabled={props.dirty && props.isValid ? false : true}
+            />
+          </Form>
+        )}
       </Formik>
+      <CustomSnackbar
+        open={toastOpen}
+        setOpen={setToastOpen}
+        message={successMessage}
+      />
     </Container>
   );
 };

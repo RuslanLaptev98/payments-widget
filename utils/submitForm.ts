@@ -1,6 +1,11 @@
+import React from 'react';
 import FormObject from '../types/FormObject';
+import ResponseObject from '../types/ResponseObject';
 
-const submitForm = async (form: FormObject) => {
+const submitForm = async (
+  form: FormObject,
+  setSuccessMessage: React.Dispatch<React.SetStateAction<string>>
+) => {
   const response = await fetch('/api', {
     method: 'POST',
     body: JSON.stringify({ form }),
@@ -8,8 +13,8 @@ const submitForm = async (form: FormObject) => {
       'Content-Type': 'application/json',
     },
   });
-  const data = await response.json();
-  console.log(data);
+  const data: ResponseObject = await response.json();
+  setSuccessMessage(`RequestId: ${data.RequestId}, Amount: ${data.Amount}`);
 };
 
 export default submitForm;
