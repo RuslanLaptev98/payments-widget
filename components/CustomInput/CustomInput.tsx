@@ -31,7 +31,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   }, [meta]);
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box className={styles.box}>
       <TextField
         className={styles.input}
         variant='standard'

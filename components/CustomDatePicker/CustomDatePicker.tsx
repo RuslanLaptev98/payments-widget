@@ -18,7 +18,8 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
   const [helperText, setHelperText] = React.useState<string>('');
 
   React.useEffect(() => {
-    if (meta?.error) {
+    if (meta?.error && meta?.touched) {
+      console.log(meta.error);
       setError(true);
       setHelperText('Specify date in mm/yyyy format');
     }
@@ -41,9 +42,12 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
         disablePast
         label={label}
         value={field.value}
-        onChange={(value) => helpers.setValue(value)}
+        onChange={(value) => {
+          helpers.setTouched(true);
+          helpers.setValue(value);
+        }}
         renderInput={(params) => (
-          <Box sx={{ width: 300 }}>
+          <Box className={styles.box}>
             <TextField
               className={styles.input}
               variant='standard'
@@ -51,6 +55,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
               {...params}
               error={error}
               helperText={helperText ? helperText : ' '}
+              onBlur={() => helpers.setTouched(true)}
             />
           </Box>
         )}

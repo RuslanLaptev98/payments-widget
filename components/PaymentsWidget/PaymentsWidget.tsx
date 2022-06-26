@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CardForm.module.css';
+import styles from './PaymentsWidget.module.css';
 import { Container, Typography } from '@mui/material';
 import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -10,33 +10,10 @@ import submitForm from '../../utils/submitForm';
 import getMmYyyyDate from '../../utils/getMmYyyyDate';
 import FormikValues from '../../types/FormikValues';
 import CustomSnackbar from '../CustomSnackbar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import customTheme from '../../utils/customTheme';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#85B6BF',
-    },
-    secondary: {
-      main: '#5BC197',
-    },
-    error: {
-      main: '#B91D1D',
-    },
-    text: {
-      primary: '#85B6BF',
-      secondary: 'rgba(133, 182, 191, 0.5)',
-    },
-    action: {
-      disabledBackground: 'rgba(133, 182, 191, 0.5)',
-    },
-  },
-  typography: {
-    fontFamily: 'Electrolize, sans-serif',
-  },
-});
-
-const CardForm: React.FC = () => {
+const PaymentsWidget: React.FC = () => {
   const formikInitialValues: FormikValues = {
     number: '',
     date: null,
@@ -50,7 +27,7 @@ const CardForm: React.FC = () => {
       .matches(/^[0-9]+$/, 'Must be only digits')
       .min(16, 'Must be exactly 16 digits')
       .max(16, 'Must be exactly 16 digits'),
-    date: Yup.date().not([null]),
+    date: Yup.date().required('Required'),
     cvv: Yup.string()
       .required('Required')
       .matches(/^[0-9]+$/, 'Must be only digits')
@@ -66,7 +43,7 @@ const CardForm: React.FC = () => {
   }, [successMessage]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={customTheme}>
       <Container maxWidth='xs' className={styles.container}>
         <div className={styles.card}>
           <Typography className={styles.title}>Payments App</Typography>
@@ -126,4 +103,4 @@ const CardForm: React.FC = () => {
   );
 };
 
-export default CardForm;
+export default PaymentsWidget;
