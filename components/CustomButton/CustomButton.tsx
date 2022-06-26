@@ -10,7 +10,12 @@ interface CustomButtonProps {
 const CustomButton: React.FC<CustomButtonProps> = ({ title, disabled }) => {
   return (
     <Box sx={{ width: 300 }}>
-      <Button variant='contained' type='submit' disabled={disabled}>
+      <Button
+        variant='contained'
+        type='submit'
+        disabled={disabled}
+        className={styles.button}
+      >
         {title}
       </Button>
     </Box>

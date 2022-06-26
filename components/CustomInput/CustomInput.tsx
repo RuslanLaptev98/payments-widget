@@ -33,12 +33,13 @@ const CustomInput: React.FC<CustomInputProps> = ({
   return (
     <Box sx={{ width: 300 }}>
       <TextField
-        variant='outlined'
+        variant='standard'
+        color='primary'
         fullWidth
         label={label}
         {...field}
         error={error}
-        helperText={helperText}
+        helperText={helperText ? helperText : ' '}
         {...otherProps}
       />
     </Box>

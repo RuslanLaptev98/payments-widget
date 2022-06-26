@@ -17,6 +17,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
+        OpenPickerButtonProps={{ color: 'primary' }}
         views={['month', 'year']}
         inputFormat='MM/yyyy'
         disablePast
@@ -25,7 +26,12 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
         onChange={(value) => helpers.setValue(value)}
         renderInput={(params) => (
           <Box sx={{ width: 300 }}>
-            <TextField fullWidth {...params} />
+            <TextField
+              variant='standard'
+              fullWidth
+              {...params}
+              helperText={' '}
+            />
           </Box>
         )}
       />
