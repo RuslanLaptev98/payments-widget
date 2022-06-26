@@ -3,7 +3,8 @@ import Redis from 'ioredis';
 import { v4 as uuidv4 } from 'uuid';
 import FormObject from '../../types/FormObject';
 
-const redisClient = new Redis('localhost');
+const url: string = process.env.REDIS_CONNECTION_URL as string;
+const redisClient = new Redis(url);
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   if (req.method === 'POST') {
