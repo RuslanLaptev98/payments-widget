@@ -50,7 +50,7 @@ const CardForm: React.FC = () => {
       .matches(/^[0-9]+$/, 'Must be only digits')
       .min(16, 'Must be exactly 16 digits')
       .max(16, 'Must be exactly 16 digits'),
-    date: Yup.date().required('Required'),
+    date: Yup.date().not([null]),
     cvv: Yup.string()
       .required('Required')
       .matches(/^[0-9]+$/, 'Must be only digits')
@@ -90,19 +90,29 @@ const CardForm: React.FC = () => {
               resetForm();
             }}
           >
-            {(props: FormikProps<FormikValues>) => (
-              <Form className={styles.form}>
-                <CustomInput name='number' label='Card Number' />
-                <CustomDatePicker name='date' label='Expiration Date' />
-                <CustomInput name='cvv' label='CVV' />
-                <CustomInput name='amount' label='Amount' />
+            {(props: FormikProps<FormikValues>) => {
+              return (
+                <Form className={styles.form}>
+                  <CustomInput name='number' label='Card Number' />
+                  <CustomDatePicker name='date' label='Expiration Date' />
+                  <CustomInput name='cvv' label='CVV' />
+                  <CustomInput name='amount' label='Amount' />
 
-                <CustomButton
-                  title='отправить'
-                  disabled={props.dirty && props.isValid ? false : true}
-                />
-              </Form>
-            )}
+                  <CustomButton
+                    title='отправить'
+                    disabled={
+                      props.dirty &&
+                      props.isValid &&
+                      props.values.date &&
+                      !isNaN(props.values.date?.getTime()) &&
+                      props.values.date?.getTime() > new Date().getTime()
+                        ? false
+                        : true
+                    }
+                  />
+                </Form>
+              );
+            }}
           </Formik>
         </div>
 

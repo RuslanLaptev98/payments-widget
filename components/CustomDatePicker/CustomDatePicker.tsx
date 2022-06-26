@@ -14,6 +14,25 @@ interface CustomDatePickerProps {
 const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
   const [field, meta, helpers] = useField(name);
 
+  const [error, setError] = React.useState<boolean>(false);
+  const [helperText, setHelperText] = React.useState<string>('');
+
+  React.useEffect(() => {
+    console.log(field, meta);
+    if (meta?.error) {
+      setError(true);
+      setHelperText('Specify date in mm/yyyy format');
+    }
+    if (!meta?.error) {
+      setError(false);
+      setHelperText('');
+    }
+    if ((field?.value as unknown as Date)?.getTime() < new Date().getTime()) {
+      setError(true);
+      setHelperText('Your card expired');
+    }
+  }, [meta, field]);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
@@ -30,7 +49,8 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
               variant='standard'
               fullWidth
               {...params}
-              helperText={' '}
+              error={error}
+              helperText={helperText ? helperText : ' '}
             />
           </Box>
         )}
