@@ -46,6 +46,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
         renderInput={(params) => (
           <Box sx={{ width: 300 }}>
             <TextField
+              className={styles.input}
               variant='standard'
               fullWidth
               {...params}

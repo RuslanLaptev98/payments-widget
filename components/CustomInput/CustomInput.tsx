@@ -33,6 +33,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   return (
     <Box sx={{ width: 300 }}>
       <TextField
+        className={styles.input}
         variant='standard'
         color='primary'
         fullWidth
