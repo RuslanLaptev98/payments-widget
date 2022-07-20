@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import PaymentsWidget from '../components/PaymentsWidget';
+import PaymentsWidget from '../features/PaymentsWidget';
 
 const Home: NextPage = () => {
   return (

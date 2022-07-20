@@ -3,13 +3,13 @@ import styles from './PaymentsWidget.module.css';
 import { Container, Typography } from '@mui/material';
 import { Formik, Form, FormikProps } from 'formik';
 import * as Yup from 'yup';
-import CustomInput from '../CustomInput';
-import CustomDatePicker from '../CustomDatePicker';
-import CustomButton from '../CustomButton';
+import CustomInput from '../../components/CustomInput';
+import CustomDatePicker from '../../components/CustomDatePicker';
+import CustomButton from '../../components/CustomButton';
 import submitForm from '../../utils/submitForm';
 import getMmYyyyDate from '../../utils/getMmYyyyDate';
 import FormikValues from '../../types/FormikValues';
-import CustomSnackbar from '../CustomSnackbar';
+import CustomSnackbar from '../../components/CustomSnackbar';
 import { ThemeProvider } from '@mui/material/styles';
 import customTheme from '../../utils/customTheme';
 
