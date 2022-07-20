@@ -19,4 +19,6 @@ a {
 
 .app {
   background: linear-gradient(45deg, rgba(25, 33, 39, 0.8), #192127);
+  height: 100vh;
+  padding: 30px 0;
 }

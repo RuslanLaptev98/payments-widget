@@ -44,9 +44,9 @@ const PaymentsWidget: React.FC = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Container maxWidth='xs' className={styles.container}>
-        <div className={styles.card}>
-          <Typography className={styles.title}>Payments App</Typography>
+      <Container maxWidth='xs'>
+        <section className={styles.card}>
+          <Typography className={styles.title}>Payments Widget</Typography>
           <Formik
             initialValues={{ ...formikInitialValues }}
             validationSchema={validationSchema}
@@ -76,7 +76,7 @@ const PaymentsWidget: React.FC = () => {
                   <CustomInput name='amount' label='Amount' />
 
                   <CustomButton
-                    title='отправить'
+                    title='send'
                     disabled={
                       props.dirty &&
                       props.isValid &&
@@ -91,7 +91,7 @@ const PaymentsWidget: React.FC = () => {
               );
             }}
           </Formik>
-        </div>
+        </section>
 
         <CustomSnackbar
           open={toastOpen}
