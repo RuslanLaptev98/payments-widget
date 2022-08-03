@@ -14,5 +14,5 @@ Pet project
 
 ## Hosted
 
-Next.js app: [Vercel](https://vercel.com)
-PostgreSQL db: [Heroku](https://heroku.com)
+- Next.js app: [Vercel](https://vercel.com)
+- PostgreSQL db: [Heroku](https://heroku.com)

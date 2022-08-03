@@ -19,7 +19,6 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ name, label }) => {
 
   React.useEffect(() => {
     if (meta?.error && meta?.touched) {
-      console.log(meta.error);
       setError(true);
       setHelperText('Specify date in mm/yyyy format');
     }

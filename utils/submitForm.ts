@@ -14,7 +14,6 @@ const submitForm = async (
     },
   });
   const data: ResponseObject = await response.json();
-  console.log(data);
   setSuccessMessage(
     `Payment Success. RequestId: ${data.id}, Amount: ${data.amount}`
   );
