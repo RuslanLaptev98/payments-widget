@@ -1,4 +1,7 @@
 export default interface ResponseObject {
-  RequestId: string;
-  Amount: string;
+  id: number;
+  cardnumber: string;
+  expdate: string;
+  cvv: string;
+  amount: string;
 }
