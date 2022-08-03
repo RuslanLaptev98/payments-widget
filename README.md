@@ -1,17 +1,16 @@
 ## Payments Widget
 
-Personal pet project for practice
-
 [payments-widget.vercel.app](https://payments-widget.vercel.app/)
+
+Pet project
 
 ## Tech Stack
 
-Next.js
+- [TypeScript](https://www.typescriptlang.org/)
+- [Next.js](https://nextjs.org/)
+- [CSS modules](https://github.com/css-modules/css-modules)
+- [MUI](https://mui.com/)
 
-TypeScript
+## Hosting
 
-CSS modules
-
-MUI
-
-Redis
+Next.js app: [Vercel](https://vercel.com)
