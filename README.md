@@ -2,7 +2,7 @@
 
 [payments-widget.vercel.app](https://payments-widget.vercel.app/)
 
-Pet project
+Practice project
 
 ## Tech Stack
 
